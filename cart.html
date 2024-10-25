@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>LF Marketing</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    
+    
+    <script>
+        /* CART PAGE */
+
+
+
+if(document.readyState == 'loading'){
+    document.addEventListener('DOMContentLoaded', ready)
+}
+else{
+    ready()
+}
+
+function ready(){
+
+    updateCartContent(); //temporary, just checking if it adds row to table ... Works here
+
+    var removeCartItemButtons = document.getElementsByClassName('remove-btn');
+    for (var i = 0; i < removeCartItemButtons.length; i++){
+        var button = removeCartItemButtons[i];
+        button.addEventListener('click', removeCartItem)
+    }
+
+    var quantityInputs = document.getElementsByClassName('cart-quantity-input');
+    for (var i = 0; i < quantityInputs.length; i++){
+        var input = quantityInputs[i];
+        input.addEventListener('change', quantityChanged)
+    }
+
+    updateCartTotal();
+
+} 
+
+function removeCartItem(event){
+    var buttonClicked = event.target;
+    var $row = $(this).closest("tr");    // Find the row
+    var $text = $row.find(".hidden-id").text(); // Find the text
+    console.log("closestID: " + $text)
+    localStorage.removeItem('item'+ $text);
+
+    buttonClicked.parentElement.parentElement.remove();
+    updateCartTotal();
+}
+
+function quantityChanged(event){
+    var input = event.target
+    if(isNaN(input.value) || input.value <= 0){
+        input.value = 1;
+    }
+    updateCartTotal();
+}
+
+function updateCartTotal() {
+    var cartItemContainer = document.getElementsByClassName('cart-items')[0];
+    var cartRows = cartItemContainer.getElementsByClassName('cart-row');
+    var total = 0;
+    for (var i = 0; i < cartRows.length; i++){
+        var cartRow = cartRows[i];
+        var quantityElement = cartRow.getElementsByClassName('cart-quantity-input')[0]; 
+        var quantity = quantityElement.value;
+        total += 1*quantity;
+    }
+
+    console.log("total = " + total);
+
+    document.getElementsByClassName('cart-total-quantity')[0].innerText = total;
+}
+
+function updateCartContent(){
+    console.log('updateCartContent() CALLED')
+
+    for ( var i = 0, len = parseInt(localStorage.getItem("counter")); i <= len; ++i ) {
+        var storageKey = "item" + i;
+        var rows = "";
+        let testItem = localStorage.getItem(storageKey);
+        if(JSON.parse(testItem) != null){
+        /*FOR TESTING 
+        console.log("1-----testItem RAW DATA: " + JSON.parse(testItem));
+        console.log("-1----testItem DATA TYPE: " + typeof JSON.parse(testItem));
+        console.log("--1---testItem.localID: " + typeof JSON.parse(testItem).localID);
+        console.log("---1--testItem.product: " + JSON.parse(testItem).product);
+        console.log("----1-testItem.imageSrc: " + JSON.parse(testItem).imageSrc);
+        console.log("-----1testItem.quantity: " + JSON.parse(testItem).quantity);
+        console.log("-----testItem.description: " + JSON.parse(testItem).description);*/
+
+        rows += "<tr class=\"cart-row\"> <td class=\"hidden-id\" style=\"visibility:hidden;\">" + JSON.parse(testItem).localID + "<td>  <button class=\"normal remove-btn\">Remove</button></td> <td><img src=\" " + JSON.parse(testItem).imageSrc + "\" alt=\"\"></td> <td>" + JSON.parse(testItem).product + "</td> <td>" + JSON.parse(testItem).description + "</td> <td><input class=\"cart-quantity-input\" type=\"number\" value=\""+ parseInt(JSON.parse(testItem).quantity) + "\"></td> </tr>";
+        $(rows).appendTo("#cartTable tbody");
+        //console.log("ROW ADDED. HiddenID: " + typeof JSON.parse(testItem).localID); For testing
+        }
+        else{
+            console.log("-----testItem DATA IS NULL: " + typeof JSON.parse(testItem));
+        }
+  }
+
+    
+    updateCartTotal();
+
+}
+
+    </script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <section id="header">
+        <a href="index.html"><img src="img/logo.png" class="logo" alt=""></a> <!-- Logo Image -->
+        <div>
+            <ul id="navbar"> <!-- Navigation bar -->
+                <li><a href="index.html">Home</a></li>
+                <li><a href="promos.html">Promotions</a></li>
+                <li><a href="shop.html">Catalog</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="lg-bag"><a class="active" href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+
+        <div id="mobile">  <!-- Navigation bar for mobile devices -->
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent "></i>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+        <h2>Welcome To Your Cart</h2>
+        <p>Unleash your brand's potential with custom-made promotional products that make a lasting impact</p>
+    </section>
+
+    <section id="cart" class="section-p1">
+        <table id="cartTable" width="100%">
+            <thead>
+                <tr>
+                    <td style="visibility:hidden;">HiddenID</td>
+                    <td>Remove</td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Description</td>
+                    <td>Quantity</td>
+                </tr>
+            </thead>
+            <tbody class="cart-items">
+            
+            </tbody>  
+        </table>
+    </section>
+
+    <section id="cart-add" class="section-p1">
+        <div id="coupon">
+            <h3>Apply Coupon</h3>
+            <div>
+                <input id="coupon-input" type="text" placeholder="Enter coupon here">
+                <button class="normal add-coupon-button">Apply</button>
+            </div>
+        </div>
+
+        <div id="subtotal">
+            <h3>Cart Totals</h3>
+            <table>
+                <tr>
+                    <td><strong>Total Items</strong></td>
+                    <td class="cart-total-quantity">0</td>
+                </tr>
+            </table>
+            <form action="" onsubmit="sendOrder(); reset(); return false;">
+                <input id="name" type="text" placeholder="Your Name">
+                <input id="email" type="text" placeholder="E-Mail">
+                <input id="phone" type="text" placeholder="Phone Number">
+                <textarea name="" id="message" cols="30" rows="10" placeholder="Additional Message"></textarea>
+                <button class="normal">Submit & Get Free Quote</button>
+            </form>
+            
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="img/logo.png" alt="">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> Los Angeles, CA</p>
+            <p><strong>E-mail:</strong> LFmarketing4u@gmail.com</p>
+            <p><strong>Hours:</strong> 8:00am - 10:00pm. Mon - Sun. </p>
+            <div class="follow">
+                <h4><a href="https://www.instagram.com/l.f.marketing/">Follow Us On Instagram! <i class="fab fa-instagram"></i></a> </h4>
+                <div class="icon">
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="about.html">About Us</a>
+            <a href="faq.html">Frequently Asked Questions</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>Popular Links</h4>
+            <a href="promos.html">Promotions</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="shop.html">Catalog</a>
+            <a href="https://www.instagram.com/l.f.marketing/">Instragram Page</a>
+            <a href="contact.html">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4>Payment Methods</h4>
+            <p>Secured Payment Gateways</p>
+            <img src="img/pay/pay.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>© 2023, LF Marketing - HTML CSS & JavaScript Technologies</p>
+        </div>
+
+    </footer>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>

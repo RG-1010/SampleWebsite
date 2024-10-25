@@ -1,0 +1,44 @@
+<tbody id="tbodytag" class="cart-items">
+                <tr class="cart-row">
+                    <td><button class="normal remove-btn">Remove</button></td>
+                    <td><img src="img/products/f1.jpg" alt=""></td>
+                    <td>Cartoon Astronaut T-Shirt</td>
+                    <td>
+                        <select>
+                        <option>Select Quality</option>
+                        <option> Standard</option>
+                        <option>Premium</option>
+                        <option>High Gloss</option>
+                        </select>
+                    </td>
+                    <td><input class="cart-quantity-input" type="number" value="1"></td>
+                </tr>
+                <tr class="cart-row">
+                    <td><button class="normal remove-btn">Remove</button></td>
+                    <td><img src="img/products/f2.jpg" alt=""></td>
+                    <td>Best T-Shirt Ever Made</td>
+                    <td>
+                        <select>
+                        <option>Select Quality</option>
+                        <option> Standard</option>
+                        <option>Premium</option>
+                        <option>High Gloss</option>
+                        </select>
+                    </td>
+                    <td><input class="cart-quantity-input" type="number" value="2"></td>
+                </tr>
+                <tr class="cart-row">
+                    <td><button class="normal remove-btn">Remove</button></td>
+                    <td><img src="img/products/f3.jpg" alt=""></td>
+                    <td>Really Cool T-Shirt</td>
+                    <td>
+                        <select>
+                        <option>Select Quality</option>
+                        <option> Standard</option>
+                        <option>Premium</option>
+                        <option>High Gloss</option>
+                        </select>
+                    </td>
+                    <td><input class="cart-quantity-input" type="number" value="3"></td>
+                </tr>
+            </tbody>  

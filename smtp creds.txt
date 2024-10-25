@@ -1,0 +1,11 @@
+Username
+raul.guerra.1901.flex@gmail.com
+
+Password
+ACED6455F3E11DC9BE728948172E1350484C
+
+Server
+smtp.elasticemail.com
+
+Port
+2525
