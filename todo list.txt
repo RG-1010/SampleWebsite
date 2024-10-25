@@ -1,0 +1,32 @@
+android/iphone landscape mode - pictures in index are not to scale
+Check all the banners
+fix promoproducts.html
+add phone number to footers
+Promos.html ... banner letters are misaligned
+
+
+
+
+
+----------------------
+
+update index with cagtalog ----> finish updating lower products first
+Change to email, instead of phone in all footers ----> Luis@LFMarketingTeam.com, also in Contact.htmls
+Change pictures in Feature Boxes in index. Also in Promotions and About
+Change picture for Website Design card in index and catalog.
+Update Feature Products in all products (bottom page)
+Change color of white banner in index. Change image to darker color.
+Make marquee text in About.html with bigger and bolder letters.
+Make sure coupon button works. Email coupon by luis
+Move the Discount Percentage upward in Promos.html ----> Make discounts yellow
+Check instagram live feedx
+Change "Follow Us" in all footers, to "Follow Us On Instagram". Remove icons from social media. Make instagram icon bigger.
+"Fastest Turnaround in the county" - On index.html. Replace the white/yellow banner with this phrase. 
+Get better quality logo for footer
+Remove dashes in main index banner?
+FAQ and T&C need updating
+Get the right email address. Update all footers and contact page.
+No phone number in contact page? Update mark's email and phone?
+Which email does luis want to receive messages to?
+Update Promo page with actual promo codes people can use.
+Cart page: Change "Submit Order" button to "Get Free Quote"
